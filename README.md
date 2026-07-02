@@ -4,10 +4,10 @@
 
 **A high-performance ART hooking framework for modern Android**
 
-[![Build](https://img.shields.io/github/actions/workflow/status/JingMatrix/Vector/core.yml?branch=master&event=push&logo=github&label=Build)](https://github.com/JingMatrix/Vector/actions/workflows/core.yml?query=event%3Apush+branch%3Amaster+is%3Acompleted)
+[![Build](https://img.shields.io/github/actions/workflow/status/Ujhhgtg/Vector/core.yml?branch=master&event=push&logo=github&label=Build)](https://github.com/Ujhhgtg/Vector/actions/workflows/core.yml?query=event%3Apush+branch%3Amaster+is%3Acompleted)
 [![Crowdin](https://img.shields.io/badge/Localization-Crowdin-blueviolet?logo=Crowdin)](https://crowdin.com/project/lsposed_jingmatrix)
-[![Download](https://img.shields.io/github/v/release/JingMatrix/Vector?color=orange&logoColor=orange&label=Download&logo=DocuSign)](https://github.com/JingMatrix/Vector/releases/latest)
-[![Total](https://shields.io/github/downloads/JingMatrix/Vector/total?logo=Bookmeter&label=Counts&logoColor=yellow&color=yellow)](https://github.com/JingMatrix/Vector/releases)
+[![Download](https://img.shields.io/github/v/release/Ujhhgtg/Vector?color=orange&logoColor=orange&label=Download&logo=DocuSign)](https://github.com/Ujhhgtg/Vector/releases/latest)
+[![Total](https://shields.io/github/downloads/Ujhhgtg/Vector/total?logo=Bookmeter&label=Counts&logoColor=yellow&color=yellow)](https://github.com/Ujhhgtg/Vector/releases)
 
 </div>
 
@@ -44,8 +44,8 @@ Vector supports devices running **Android 8.1 through Android 17 Beta**.
 
 | Channel | Source |
 | :--- | :--- |
-| **Stable Releases** | [GitHub Releases](https://github.com/JingMatrix/Vector/releases) |
-| **Canary (CI) Builds** | [GitHub Actions](https://github.com/JingMatrix/Vector/actions/workflows/core.yml?query=branch%3Amaster) |
+| **Stable Releases** | [GitHub Releases](https://github.com/Ujhhgtg/Vector/releases) |
+| **Canary (CI) Builds** | [GitHub Actions](https://github.com/Ujhhgtg/Vector/actions/workflows/core.yml?query=branch%3Amaster) |
 
 > [!NOTE]
 > Debug builds are recommended for users encountering issues or performing troubleshooting.
@@ -63,8 +63,8 @@ Vector supports devices running **Android 8.1 through Android 17 Beta**.
 
 If you encounter issues or wish to help improve the project, please refer to the resources below.
 
-*   **Troubleshooting:** Consult the [guide](https://github.com/JingMatrix/Vector/issues/123) before reporting bugs.
-*   **Discussions:** Join our community on [GitHub Discussions](https://github.com/JingMatrix/Vector/discussions).
+*   **Troubleshooting:** Consult the [guide](https://github.com/Ujhhgtg/Vector/issues/123) before reporting bugs.
+*   **Discussions:** Join our community on [GitHub Discussions](https://github.com/Ujhhgtg/Vector/discussions).
 *   **Localization:** Help translate the project via [Crowdin](https://crowdin.com/project/lsposed_jingmatrix).
 
 > [!IMPORTANT]
@@ -87,7 +87,7 @@ Vector supports both legacy and modern hooking standards to ensure broad module 
 > [!NOTE]
 > Vector supports the `libxposed` API via two git submodules: the [module API](./xposed/) and the [service API](./services/).
 >
-> A successful GitHub Actions build of the [master](https://github.com/JingMatrix/Vector/tree/master) branch indicates that Vector fully supports these APIs at those specific commits.
+> A successful GitHub Actions build of the [master](https://github.com/Ujhhgtg/Vector/tree/master) branch indicates that Vector fully supports these APIs at those specific commits.
 > Developers are suggested to check out the same commits as Vector.
 
 ---

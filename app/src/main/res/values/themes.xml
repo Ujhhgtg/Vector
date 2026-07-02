@@ -19,52 +19,16 @@
 
 <resources>
 
-    <style name="Base.AppTheme.Light" parent="Theme.Material3.DynamicColors.Light.Rikka">
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="colorPrimaryVariant">@color/primary_dark_light_light_status_bar</item>
-
-        <item name="android:statusBarColor">?android:colorBackground</item>
-        <item name="android:windowActionBar">false</item>
+    <!--
+      Minimal launch theme. The UI is fully Jetpack Compose (see VectorTheme), which resolves the
+      real color scheme, night mode and accent at runtime. This style only governs the brief launch
+      window before Compose draws, so it just needs a sane Material3 base with no action bar.
+    -->
+    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.DayNight">
         <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-        <!-- Preference title -->
-        <item name="android:textAppearanceListItem">?textAppearanceSubtitle1</item>
-        <!-- Preference category title -->
-        <item name="android:colorAccent">?colorPrimary</item>
-        <!-- Preference switch -->
-        <item name="android:colorControlActivated">?colorPrimary</item>
-    </style>
-
-    <style name="Theme.Light" parent="Base.AppTheme.Light" />
-
-    <style name="Base.AppTheme" parent="Theme.Material3.DynamicColors.Dark.Rikka">
         <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-        <!-- Preference title -->
-        <item name="android:textAppearanceListItem">?textAppearanceSubtitle1</item>
-        <!-- Preference category title -->
-        <item name="android:colorAccent">?colorPrimary</item>
-        <!-- Preference switch -->
-        <item name="android:colorControlActivated">?colorPrimary</item>
-    </style>
-
-    <style name="Theme" parent="Base.AppTheme" />
-
-    <style name="DeviceInfoDialogLabel">
-        <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body1</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
-
-    <style name="DeviceInfoDialogValue">
-        <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
-        <item name="android:paddingBottom">24dp</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
 </resources>

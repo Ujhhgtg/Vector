@@ -19,112 +19,45 @@
 
 package org.lsposed.manager.util;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-
-import androidx.annotation.StyleRes;
-import androidx.appcompat.app.AppCompatDelegate;
-
-import com.google.android.material.color.DynamicColors;
+import android.os.Build;
 
 import org.lsposed.manager.App;
-import org.lsposed.manager.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import rikka.core.util.ResourceUtils;
-
+/**
+ * Theme preference accessors. Since the UI is fully Jetpack Compose (see {@code VectorTheme}), the
+ * Compose layer derives the active {@code ColorScheme} directly from these preferences — there are
+ * no View-system theme overlays or {@code AppCompatDelegate} night-mode hooks any more.
+ */
 public class ThemeUtil {
-    private static final Map<String, Integer> colorThemeMap = new HashMap<>();
-    private static final SharedPreferences preferences;
+    private static final SharedPreferences preferences = App.getPreferences();
 
     public static final String MODE_NIGHT_FOLLOW_SYSTEM = "MODE_NIGHT_FOLLOW_SYSTEM";
     public static final String MODE_NIGHT_NO = "MODE_NIGHT_NO";
     public static final String MODE_NIGHT_YES = "MODE_NIGHT_YES";
 
-    static {
-        preferences = App.getPreferences();
-        colorThemeMap.put("SAKURA", R.style.ThemeOverlay_MaterialSakura);
-        colorThemeMap.put("MATERIAL_RED", R.style.ThemeOverlay_MaterialRed);
-        colorThemeMap.put("MATERIAL_PINK", R.style.ThemeOverlay_MaterialPink);
-        colorThemeMap.put("MATERIAL_PURPLE", R.style.ThemeOverlay_MaterialPurple);
-        colorThemeMap.put("MATERIAL_DEEP_PURPLE", R.style.ThemeOverlay_MaterialDeepPurple);
-        colorThemeMap.put("MATERIAL_INDIGO", R.style.ThemeOverlay_MaterialIndigo);
-        colorThemeMap.put("MATERIAL_BLUE", R.style.ThemeOverlay_MaterialBlue);
-        colorThemeMap.put("MATERIAL_LIGHT_BLUE", R.style.ThemeOverlay_MaterialLightBlue);
-        colorThemeMap.put("MATERIAL_CYAN", R.style.ThemeOverlay_MaterialCyan);
-        colorThemeMap.put("MATERIAL_TEAL", R.style.ThemeOverlay_MaterialTeal);
-        colorThemeMap.put("MATERIAL_GREEN", R.style.ThemeOverlay_MaterialGreen);
-        colorThemeMap.put("MATERIAL_LIGHT_GREEN", R.style.ThemeOverlay_MaterialLightGreen);
-        colorThemeMap.put("MATERIAL_LIME", R.style.ThemeOverlay_MaterialLime);
-        colorThemeMap.put("MATERIAL_YELLOW", R.style.ThemeOverlay_MaterialYellow);
-        colorThemeMap.put("MATERIAL_AMBER", R.style.ThemeOverlay_MaterialAmber);
-        colorThemeMap.put("MATERIAL_ORANGE", R.style.ThemeOverlay_MaterialOrange);
-        colorThemeMap.put("MATERIAL_DEEP_ORANGE", R.style.ThemeOverlay_MaterialDeepOrange);
-        colorThemeMap.put("MATERIAL_BROWN", R.style.ThemeOverlay_MaterialBrown);
-        colorThemeMap.put("MATERIAL_BLUE_GREY", R.style.ThemeOverlay_MaterialBlueGrey);
-    }
-
-    private static final String THEME_DEFAULT = "DEFAULT";
-    private static final String THEME_BLACK = "BLACK";
-
-    private static boolean isBlackNightTheme() {
-        return preferences.getBoolean("black_dark_theme", false);
+    /**
+     * Dynamic (Monet) color is available from Android 12 (S). The system-accent preference can only
+     * take effect on such devices.
+     */
+    public static boolean isDynamicColorAvailable() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.S;
     }
 
     public static boolean isSystemAccent() {
-        return DynamicColors.isDynamicColorAvailable() && preferences.getBoolean("follow_system_accent", true);
+        return isDynamicColorAvailable() && preferences.getBoolean("follow_system_accent", true);
     }
 
-    public static String getNightTheme(Context context) {
-        if (isBlackNightTheme()
-                && ResourceUtils.isNightMode(context.getResources().getConfiguration()))
-            return THEME_BLACK;
-
-        return THEME_DEFAULT;
-    }
-
-    @StyleRes
-    public static int getNightThemeStyleRes(Context context) {
-        switch (getNightTheme(context)) {
-            case THEME_BLACK:
-                return R.style.ThemeOverlay_Black;
-            case THEME_DEFAULT:
-            default:
-                return R.style.ThemeOverlay;
-        }
-    }
-
+    /** The selected accent key (e.g. {@code MATERIAL_BLUE}), or {@code SYSTEM} when following the wallpaper. */
     public static String getColorTheme() {
         if (isSystemAccent()) {
             return "SYSTEM";
         }
-        return preferences.getString("theme_color", "COLOR_BLUE");
+        return preferences.getString("theme_color", "MATERIAL_BLUE");
     }
 
-    @StyleRes
-    public static int getColorThemeStyleRes() {
-        Integer theme = colorThemeMap.get(getColorTheme());
-        if (theme == null) {
-            return R.style.ThemeOverlay_MaterialBlue;
-        }
-        return theme;
-    }
-
-    public static int getDarkTheme(String mode) {
-        switch (mode) {
-            case MODE_NIGHT_FOLLOW_SYSTEM:
-            default:
-                return AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
-            case MODE_NIGHT_YES:
-                return AppCompatDelegate.MODE_NIGHT_YES;
-            case MODE_NIGHT_NO:
-                return AppCompatDelegate.MODE_NIGHT_NO;
-        }
-    }
-
-    public static int getDarkTheme() {
-        return getDarkTheme(preferences.getString("dark_theme", MODE_NIGHT_FOLLOW_SYSTEM));
+    /** The chosen night mode (follow-system / always / never), used by the Compose theme. */
+    public static String getDarkThemeMode() {
+        return preferences.getString("dark_theme", MODE_NIGHT_FOLLOW_SYSTEM);
     }
 }

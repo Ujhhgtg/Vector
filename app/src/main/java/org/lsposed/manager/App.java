@@ -40,16 +40,14 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.preference.PreferenceManager;
 
 import org.lsposed.hiddenapibypass.HiddenApiBypass;
 import org.lsposed.manager.adapters.AppHelper;
 import org.lsposed.manager.receivers.LSPManagerServiceHolder;
 import org.lsposed.manager.repo.RepoLoader;
 import org.lsposed.manager.util.CloudflareDNS;
+import org.lsposed.manager.util.LocaleUtil;
 import org.lsposed.manager.util.ModuleUtil;
-import org.lsposed.manager.util.ThemeUtil;
 import org.lsposed.manager.util.UpdateUtil;
 
 import java.io.ByteArrayOutputStream;
@@ -68,7 +66,6 @@ import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import rikka.core.os.FileUtils;
-import rikka.material.app.LocaleDelegate;
 
 public class App extends Application {
     public static final int PER_USER_RANGE = 100000;
@@ -196,7 +193,7 @@ public class App extends Application {
         instance = this;
 
         setCrashReport();
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        pref = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
         if (!pref.contains("doh")) {
             var name = "private_dns_mode";
             if ("hostname".equals(Settings.Global.getString(getContentResolver(), name))) {
@@ -205,11 +202,10 @@ public class App extends Application {
                 pref.edit().putBoolean("doh", true).apply();
             }
         }
-        AppCompatDelegate.setDefaultNightMode(ThemeUtil.getDarkTheme());
-        LocaleDelegate.setDefaultLocale(getLocale());
+        LocaleUtil.setDefaultLocale(getLocale());
         var res = getResources();
         var config = res.getConfiguration();
-        config.setLocale(LocaleDelegate.getDefaultLocale());
+        config.setLocale(LocaleUtil.getDefaultLocale());
         //noinspection deprecation
         res.updateConfiguration(config, res.getDisplayMetrics());
 
@@ -266,7 +262,7 @@ public class App extends Application {
 
     public static Locale getLocale(String tag) {
         if (TextUtils.isEmpty(tag) || "SYSTEM".equals(tag)) {
-            return LocaleDelegate.getSystemLocale();
+            return LocaleUtil.getSystemLocale();
         }
         return Locale.forLanguageTag(tag);
     }

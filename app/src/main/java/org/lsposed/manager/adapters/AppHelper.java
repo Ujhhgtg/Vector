@@ -92,29 +92,6 @@ public class AppHelper {
         return intent;
     }
 
-    public static boolean onOptionsItemSelected(MenuItem item, SharedPreferences preferences) {
-        int itemId = item.getItemId();
-        int i = preferences.getInt("list_sort", 0);
-        if (itemId == R.id.item_sort_by_name) {
-            i = (i % 2 == 0) ? 0 : 1;
-        } else if (itemId == R.id.item_sort_by_package_name) {
-            i = (i % 2 == 0) ? 2 : 3;
-        } else if (itemId == R.id.item_sort_by_install_time) {
-            i = (i % 2 == 0) ? 4 : 5;
-        } else if (itemId == R.id.item_sort_by_update_time) {
-            i = (i % 2 == 0) ? 6 : 7;
-        } else if (itemId == R.id.reverse) {
-            if (i % 2 == 0) i++;
-            else i--;
-        } else {
-            return false;
-        }
-        preferences.edit().putInt("list_sort", i).apply();
-        if (item.isCheckable())
-            item.setChecked(!item.isChecked());
-        return true;
-    }
-
     public static Comparator<PackageInfo> getAppListComparator(int sort, PackageManager pm) {
         ApplicationInfo.DisplayNameComparator displayNameComparator = new ApplicationInfo.DisplayNameComparator(pm);
         return switch (sort) {

@@ -97,6 +97,7 @@ JingMatrix</string>
     <string name="menuReload">重新加载</string>
     <string name="logs_clear_failed_2">日志清空失败</string>
     <string name="menu_enable_word_wrap">自动换行</string>
+    <string name="menu_pretty_print">美化显示</string>
     <string name="enabled_verbose_log">详细日志已启用</string>
     <string name="disabled_verbose_log">详细日志已禁用</string>
     <!-- ModulesActivity -->

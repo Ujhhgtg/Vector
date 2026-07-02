@@ -98,6 +98,7 @@
     <string name="menuReload">Reload</string>
     <string name="logs_clear_failed_2">Failed to clear the log</string>
     <string name="menu_enable_word_wrap">Word Wrap</string>
+    <string name="menu_pretty_print">Pretty printing</string>
     <string name="enabled_verbose_log">Verbose log enabled</string>
     <string name="disabled_verbose_log">Verbose log disabled</string>
     <!-- ModulesActivity -->
